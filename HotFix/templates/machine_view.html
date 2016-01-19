@@ -1,0 +1,48 @@
+
+    <!-- BOX -->
+    <div class="box border blue">
+        <div class="box-title">
+            <h4><i class="fa fa-desktop"></i>{{ p_machine.name }}</h4>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body big">
+            <dl class="dl-horizontal">
+                <dt>状态</dt>
+                <dd>
+                    {% if p_machine.status == 1 %}
+                        <span class="label label-success">{{ p_machine.get_status_display }}</span>
+                    {% else %}
+                        <span class="label label-danger">{{ p_machine.get_status_display }}</span>
+                    {% endif %}
+                </dd>
+                <dt>主机地址</dt>
+                <dd>{{ p_machine.address }}</dd>
+                <dt>描述</dt>
+                <dd>{{ p_machine.description }}</dd>
+                <dt>创建时间</dt>
+                <dd>{{ p_machine.createdAt|date:'Y-m-d H:i:s' }}</dd>
+                <dt>修改时间</dt>
+                <dd>{{ p_machine.modifyAt|date:'Y-m-d H:i:s' }}</dd>
+            </dl>
+        </div>
+    </div>
+    <!-- /BOX -->
+
+    <p class="btn-toolbar">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'machine_edit' p_machine.id %}">
+                <button class="btn btn-info"><i class="fa fa-edit"></i> 修改</button>
+            </a>
+
+            <a href="{% url 'machine_delete' p_machine.id %}">
+                <button class="btn btn-danger"><i class="fa fa-trash-o"></i> 删除</button>
+            </a>
+        {% endif %}
+    </p>

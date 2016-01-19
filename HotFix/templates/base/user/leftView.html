@@ -1,0 +1,72 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="{{ STATIC_URL }}hotfix/img/avatar.png" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+              <p>{{ request.user.last_name }}{{ request.user.first_name }}</p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> go go go go .</a>
+            </div>
+          </div>
+
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="搜索..."/>
+              <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+                <li class="header" style="color: #ffffff">我的应用</li>
+                <!-- Optionally, you can add icons to the links -->
+                <li class="active"><a href="/app/"><i class='fa fa-link'></i> <span>APP信息</span></a></li>
+                <li><a href="#"><i class='fa fa-link'></i> <span>版本信息</span></a></li>
+                <li class="treeview">
+                  <a href="#"><i class='fa fa-link'></i> <span>测试管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                      <li><a href="/suite/">测试套件</a></li>
+                      <li><a href="/case/">测试用例</a></li>
+                      <li><a href="/script/">测试脚本</a></li>
+                      <li><a href="/machine/">测试设备</a></li>
+                      <li><a href="#">测试任务</a></li>
+                      <li><a href="/report/">测试报表</a></li>
+                  </ul>
+              </li>
+            </ul><!-- /.sidebar-menu -->
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header" style="color: #ffffff">HOT FIX</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li><a href="#"><i class='fa fa-link'></i> <span>上传新版本</span></a></li>
+              <li class="treeview">
+                  <a href="#"><i class='fa fa-link'></i> <span>统计分析</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                      <li><a href="#">稳定性分析</a></li>
+                      <li><a href="#">修复结果分析</a></li>
+                      <li><a href="#">XXXX分析</a></li>
+                  </ul>
+              </li>
+            <li class="treeview">
+              <a href="#"><i class='fa fa-link'></i> <span>开发文档</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#">SDK文档</a></li>
+                <li><a href="#">API文档</a></li>
+              </ul>
+            </li>
+          </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>

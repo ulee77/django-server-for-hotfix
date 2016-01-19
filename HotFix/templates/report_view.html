@@ -1,0 +1,54 @@
+
+    <!-- BOX -->
+    <div class="box border blue">
+        <div class="box-title">
+            <h4><i class="fa fa-dashboard"></i>用例列表</h4>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>用例名称</th>
+                    <th>状态</th>
+                    <th>log</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if case_reports %}
+                    {% for case_report in case_reports %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ case_report.case.name }}</td>
+                            <td>
+                            {% ifequal case_report.result 1 %}
+                                    <span class="label label-success">{{ case_report.get_result_display }}</span>
+                            {% endifequal %}
+                            {% ifequal case_report.result 2 %}
+                                    <span class="label label-danger">{{ case_report.get_result_display }}</span>
+                            {% endifequal %}
+                            {% ifequal case_report.result 3 %}
+                                    <span class="label label-info">{{ case_report.get_result_display }}</span>
+                            {% endifequal %}
+                            </td>
+                            <td><a href="/report/log/view?name={{ case_report.case.name }}&id={{ p_task_report.id }}">log_link</a></td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>没有找到数据.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /BOX -->
