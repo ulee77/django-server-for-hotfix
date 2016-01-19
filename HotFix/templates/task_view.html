@@ -1,0 +1,175 @@
+{% extends "layout.html" %}
+{% block sidebar %}
+    <div class="sidebar-menu nav-collapse">
+        <div class="divide-20"></div>
+        <!-- SEARCH BAR -->
+        <div id="search-bar">
+            <input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+        </div>
+        <!-- /SEARCH BAR -->
+        {%  if suites %}
+            <!-- SIDEBAR MENU -->
+            <ul>
+                {% for suite in suites %}
+                    <li>
+                        <a class="" href="{% url 'task_list_index' suite.id %}">
+                            <i class="fa fa-bookmark"></i>
+                            <span class="menu-text">{{ suite.name }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <!-- /SIDEBAR MENU -->
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block header %}
+    <!-- PAGE HEADER-->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-header" style="padding-top: 15px">
+                <div class="clearfix">
+                    <h3 class="content-title pull-left">{{ p_task.suite.name }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /PAGE HEADER -->
+{% endblock %}
+
+
+{% block content %}
+    <!-- BOX -->
+    <div class="box border blue">
+        <div class="box-title">
+            <h4><i class="fa fa-bars"></i>{{ p_task.name }}</h4>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body big">
+            <dl class="dl-horizontal">
+                <dt>描述</dt>
+                <dd>{{ p_task.description }}</dd>
+                <dt>创建时间</dt>
+                <dd>{{ p_task.createdAt|date:'Y-m-d H:i:s' }}</dd>
+                <dt>修改时间</dt>
+                <dd>{{ p_task.modifyAt|date:'Y-m-d H:i:s' }}</dd>
+            </dl>
+            {% if p_task_cases %}
+                <a href="{% url 'task_trigger' p_task.id %}">执行</a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- /BOX -->
+
+
+    <div id="formWizard" class="box border purple">
+        <div class="box-title" id="case">
+            <h4><i class="fa fa-suitcase"></i>用例列表</h4>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        {% if p_task_cases %}
+            <div class="box-body">
+                {% for p_task_case in p_task_cases %}
+                    <!-- PAGERS -->
+                    <div class="box border green">
+                        <div class="box-title">
+                            <h4><i class="fa fa-suitcase"></i>{{ p_task_case.case.name }}</h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a href="javascript:;" class="remove">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <dl class="dl-horizontal">
+                                <dt>描述</dt>
+                                <dd>{{ p_task_case.case.description }}</dd>
+                                <dt>创建时间</dt>
+                                <dd>{{ p_task_case.case.createdAt|date:'Y-m-d H:i:s' }}</dd>
+                                <dt>修改时间</dt>
+                                <dd>{{ p_task_case.case.modifyAt|date:'Y-m-d H:i:s' }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- /PAGERS -->
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="box-body big">
+                没有找到数据.
+            </div>
+        {% endif %}
+    </div>
+    <!-- BOX -->
+    <div class="box border orange">
+        <div class="box-title">
+            <h4><i class="fa fa-gavel"></i>运行结果</h4>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body big">
+            {% if task_reports %}
+                <dl class="dl-horizontal">
+                    <dt>运行次数</dt>
+                    <dd>{{ task_reports.count}}</dd>
+                </dl>
+                <h4>最新状态</h4>
+                <dl class="dl-horizontal">
+                    <dt>创建时间</dt>
+                    <dd>{{ task_report.createdAt|date:'Y-m-d H:i:s' }}</dd>
+                    <dt>运行状态</dt>
+                    {% ifequal task_report.result 1 %}
+                        <dd><span class="label label-success">{{ task_report.get_result_display }}</span></dd>
+                    {% endifequal %}
+                    {% ifequal task_report.result 2 %}
+                        <dd><span class="label label-danger">{{ task_report.get_result_display }}</span></dd>
+                    {% endifequal %}
+                    {% ifequal task_report.result 3 %}
+                        <dd><span class="label label-info">{{ task_report.get_result_display }}</span></dd>
+                    {% endifequal %}
+                    <dt>运行环境</dt>
+                <dd>{{ machine.name }}</dd>
+                </dl>
+            {% else %}
+                无数据
+            {% endif %}
+        </div>
+    </div>
+    <!-- /BOX -->
+    <p class="btn-toolbar">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'task_edit' p_task.id %}">
+                <button class="btn btn-info"><i class="fa fa-edit"></i> 修改</button>
+            </a>
+
+            <a href="{% url 'task_delete' p_task.id %}">
+
+                <button class="btn btn-danger"><i class="fa fa-trash-o"></i> 删除</button>
+            </a>
+        {% endif %}
+    </p>
+{% endblock %}

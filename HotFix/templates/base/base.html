@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'base/mete.html' %}
+    {% block stlye %}{% endblock %}
+{#    {% include 'base/stylesheet.html' %}#}
+
+</head>
+
+<body class="skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+{% block mainHeader %}{% endblock %}
+
+{% block leftView %}{% endblock %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        {% block contentHeader %}{% endblock %}
+
+        <!-- Main content -->
+        <section class="content" style="text-align: center;">
+            {% block content %}{% endblock %}
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+{% include 'base/mainFooter.html' %}
+
+{% block controlSider %}{% endblock %}
+</div><!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+{% block script %}{% endblock %}
+
+</body>
+</html>

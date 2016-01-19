@@ -1,0 +1,52 @@
+
+    <!-- BOX -->
+    <div class="box border blue">
+        <div class="box-title">
+            <h4><i class="fa fa-dashboard"></i>报表列表</h4>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a href="javascript:;" class="remove">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>状态</th>
+                    <th>创建时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if task_reports %}
+                    {% for task_report in task_reports %}
+                        <tr>
+                            <td><a href="{% url 'report_task_view' task_report.id %}">{{ forloop.counter }}</a></td>
+                            <td>
+                            {% ifequal task_report.result 1 %}
+                                    <span class="label label-success">{{ task_report.get_result_display }}</span>
+                            {% endifequal %}
+                            {% ifequal task_report.result 2 %}
+                                    <span class="label label-danger">{{ task_report.get_result_display }}</span>
+                            {% endifequal %}
+                            {% ifequal task_report.result 3 %}
+                                    <span class="label label-info">{{ task_report.get_result_display }}</span>
+                            {% endifequal %}
+                            </td>
+                            <td>{{ task_report.createdAt|date:'Y-m-d H:i:s' }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>没有找到数据.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /BOX -->

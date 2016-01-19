@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% block title %}应用管理{% endblock %}
+{% block stlye %}
+    {% include 'base/user/stylesheet.html' %}
+{% endblock %}
+
+{% block mainHeader %}
+    {% include 'base/user/mainHeader.html' %}
+{% endblock %}
+
+{% block leftView %}
+    {% include 'base/user/leftView.html' %}
+{% endblock %}
+
+{% block contentHeader %}
+    {% include 'base/user/contentHeader.html' %}
+{% endblock %}
+
+{% block content %}
+    {% if page == 'app' %}
+        {% include 'app.html' %}
+
+    {% elif page == 'suite' %}
+        {% include 'suite.html' %}
+    {% elif page == 'suite_create' %}
+        {% include 'suite_create.html' %}
+    {% elif page == 'suite_view' %}
+        {% include 'suite_view.html' %}
+
+    {% elif page == 'case' %}
+        {% include 'case.html' %}
+    {% elif page == 'case_create' %}
+        {% include 'case_create.html' %}
+    {% elif page == 'case_view' %}
+        {% include 'case_view.html' %}
+    {% elif page == 'case_edit' %}
+        {% include 'case_edit.html' %}
+
+    {% elif page == 'machine' %}
+        {% include 'machine.html' %}
+    {% elif page == 'machine_create' %}
+        {% include 'machine_create.html' %}
+    {% elif page == 'machine_edit' %}
+        {% include 'machine_edit.html' %}
+    {% elif page == 'machine_view' %}
+        {% include 'machine_view.html' %}
+
+    {% elif page == 'script' %}
+        {% include 'script.html' %}
+    {% elif page == 'script_view' %}
+        {% include 'script_view.html' %}
+
+    {% elif page == 'report' %}
+        {% include 'report.html' %}
+    {% elif page == 'report_task' %}
+        {% include 'report_task.html' %}
+    {% elif page == 'report_view' %}
+        {% include 'report_view.html' %}
+
+    {% elif page == 'log_view' %}
+        {% include 'log_view.html' %}
+    {% endif %}
+
+
+{% endblock %}
+
+{% block controlSider %}
+    {% include 'base/user/controlSider.html' %}
+{% endblock %}
+
+{% block script %}
+    {% include 'base/user/script.html' %}
+{% endblock %}
